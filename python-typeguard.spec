@@ -1,11 +1,9 @@
-%{?python_enable_dependency_generator}
 %global pypi_name typeguard
-%global common_desc Run-time type checker for Python 
 
 Name:           python-%{pypi_name}
 Version:        2.7.1
 Release:        1%{?dist}
-Summary:        %{common_desc}
+Summary:        Run-time type checker for Python
 License:        MIT
 URL:            https://github.com/agronholm/%{pypi_name}
 Source0:        https://pypi.io/packages/source/t/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
@@ -52,7 +50,8 @@ This library provides run-time type checking for functions defined with PEP
 %files -n python3-%{pypi_name}
 %doc README.rst
 %license LICENSE
-%{python3_sitelib}/*
+%{python3_sitelib}/%{pypi_name}/
+%{python3_sitelib}/%{pypi_name}-*.egg-info/
 
 %changelog
 * Wed May 6 2020 Christopher Brown <chris.brown@redhat.com> - 2.7.1-1
