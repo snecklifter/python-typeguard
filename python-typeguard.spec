@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        2.7.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Run-time type checker for Python
 License:        MIT
 URL:            https://github.com/agronholm/%{pypi_name}
@@ -54,5 +54,10 @@ This library provides run-time type checking for functions defined with PEP
 %{python3_sitelib}/%{pypi_name}-*.egg-info/
 
 %changelog
+* Wed May 27 2020 Christopher Brown <chris.brown@redhat.com> - 2.7.1-2
+- Remove dep generator
+- Simplify description
+- Fix file glob
+
 * Wed May 6 2020 Christopher Brown <chris.brown@redhat.com> - 2.7.1-1
 - Initial package at 2.7.1
