@@ -1,8 +1,8 @@
 %global pypi_name typeguard
 
 Name:           python-%{pypi_name}
-Version:        2.7.1
-Release:        2%{?dist}
+Version:        2.9.1
+Release:        1%{?dist}
 Summary:        Run-time type checker for Python
 License:        MIT
 URL:            https://github.com/agronholm/%{pypi_name}
@@ -11,7 +11,7 @@ BuildArch:      noarch
 
 %package -n python3-%{pypi_name}
 
-Summary:          %{common_desc}
+Summary:          %{summary}
 %{?python_provide:%python_provide python3-%{pypi_name}}
 
 BuildRequires:    python3-setuptools
@@ -22,6 +22,7 @@ BuildRequires:    python3-six >= 1.9.0
 BuildRequires:    python3-tornado >= 4.5
 BuildRequires:    python3-pytest
 BuildRequires:    python3-pytest-cov
+BuildRequires:    python3-typing-extensions
 %if %{undefined __pythondist_requires}
 Requires:         python3-six >= 1.9.0
 %endif
@@ -37,6 +38,7 @@ This library provides run-time type checking for functions defined with PEP
 
 %prep
 %autosetup -n %{pypi_name}-%{version}
+rm -rf %{pypi_name}.egg-info/*
 
 %build
 %py3_build
@@ -45,7 +47,9 @@ This library provides run-time type checking for functions defined with PEP
 %py3_install
 
 %check
+%if 0%{?python3_version_nodots} <= 038
 %{python3} -m pytest
+%endif
 
 %files -n python3-%{pypi_name}
 %doc README.rst
@@ -54,6 +58,11 @@ This library provides run-time type checking for functions defined with PEP
 %{python3_sitelib}/%{pypi_name}-*.egg-info/
 
 %changelog
+* Mon Jul 6 2020 Christopher Brown <chris.brown@redhat.com> - 2.9.1-1
+- Fix description
+- Remove egg-info in prep
+- Add conditional for python 3.9
+
 * Wed May 27 2020 Christopher Brown <chris.brown@redhat.com> - 2.7.1-2
 - Remove dep generator
 - Simplify description
